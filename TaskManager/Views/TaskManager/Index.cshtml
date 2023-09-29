@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TaskManager.Models.Tasks>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Task Manager</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DueDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsCompleted)
+            </th>
+            <th>
+                @*<a asp-action="Create" asp-route-id=@("?UserId=" + ViewBag.UserId) class="btn btn-sm btn-success">Create New</a>*@
+                <a href="TaskManager/Create?UserId=@ViewBag.UserId" class="btn btn-sm btn-success">Create New</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsCompleted)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TaskId" class="btn btn-sm btn-warning">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TaskId" class="btn btn-sm btn-primary">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TaskId" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
